@@ -1,0 +1,9 @@
+secretfile.yml
+secretfile.yml.bak
+cached_resources/
+received/
+*.sqlite
+config.yml.bak
+flexget.log
+flexget.log.1
+.config-lock

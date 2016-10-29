@@ -1,0 +1,140 @@
+web_server:
+  bind: 0.0.0.0
+  port: 3539
+secrets: secretfile.yml
+schedules:
+  # Run every task once an hour
+  - tasks: '*'
+    interval:
+      hours: 1
+tasks:
+  TV Show Search:
+    priority: 10
+    rss:  http://showrss.info/user/{{ secrets.showrss.ano }}.rss?magnets=true&namespaces=true&name=null&quality=null&re=null
+    all_series: yes
+    thetvdb_lookup: yes
+    pathscrub: windows
+    set:
+      #magnets: no
+      skip_files:
+        - '*.nfo'
+        - '*.sfv'
+        - '*[sS]ample*'
+        - '*.txt'
+    transmission:
+      host: localhost
+      port: 9091
+      username: '{{ secrets.transmission.username }}'
+      password: '{{ secrets.transmission.password }}'
+      main_file_only: true
+      content_filename: '{{ tvdb_series_name }} - {{ tvdb_season }}x{{ tvdb_episode|pad(2) }} - {{ tvdb_ep_name|default('''') }}'
+      path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
+      addpaused: no
+    email:
+      template: html
+      from: RasPi
+      subject: Shows Ready to Watch
+      to:
+        - '{{ secrets.gmail.to }}'
+        - '{{ secrets.gmail.to2 }}'
+      smtp_host: smtp.gmail.com
+      smtp_port: 587
+      smtp_login: True
+      smtp_username: '{{ secrets.gmail.user }}'
+      smtp_password: '{{ secrets.gmail.password }}'
+      smtp_tls: true
+  #task to pull movies from imdb.com watchlist and add to the movie queue
+  IMDB Movie Add - Andy:
+    priority: 20 # run before the movie search task
+    pathscrub: windows
+    imdb_list:
+      login: '{{ secrets.imdb.login_andy }}'
+      password: '{{ secrets.imdb.password_andy }}'
+      list: watchlist
+    imdb_lookup: yes
+    tmdb_lookup: yes
+    set:
+      title: "{{ movie_name }} ({{ movie_year }})"
+      tmdb_id: '{{ tmdb_id }}'
+    list_add:
+      - movie_list: watchlist_andy
+    accept_all: yes
+
+  IMDB Movie Add - Renee:
+    priority: 20 # run before the movie search task
+    pathscrub: windows
+    imdb_list:
+      login: '{{ secrets.imdb.login_renee }}'
+      password: '{{ secrets.imdb.password_renee }}'
+      list: watchlist
+    imdb_lookup: yes
+    tmdb_lookup: yes
+    set:
+      title: "{{ movie_name }} ({{ movie_year }})"
+      tmdb_id: '{{ tmdb_id }}'
+    list_add:
+      - movie_list: watchlist_renee
+    accept_all: yes
+
+  # task that automatically generates an rss feed based on entries from the movie_queue
+  Movie Torrent Search:
+    priority: 30 # run after the movie queue fill task
+    regexp:
+      reject:
+        - \b3-?D\b: {from: title}
+      reject_excluding:
+        - '[eE][nN][gG]'
+    discover:
+      what:
+        #- movie_list: all my watchlists
+        #- movie_list: watchlist
+        - movie_list: watchlist_renee
+        - movie_list: watchlist_andy
+      from:
+        - flexget_archive: yes
+        #- cpasbien: 
+            #category: 720p
+        #- piratebay: yes
+        - rarbg:
+            category: [14, 17, 42, 44, 45, 46, 48]
+        - newtorrents:
+            interval: 1 days
+      release_estimations: strict
+    torrent_alive: 1 # Will reject results with less than 1 seeds
+    quality: dvdrip+ # Make sure no screeners or cams are downloaded
+    list_match:
+      from:
+        - movie_list: watchlist_renee
+        - movie_list: watchlist_andy
+    transmission:
+      host: localhost
+      port: 9091
+      username: '{{ secrets.transmission.username }}'
+      password: '{{ secrets.transmission.password }}'
+      main_file_only: true
+      content_filename: '{{ imdb_name }} ({{ imdb_year }}) - {{ quality|upper }}'
+      path: /mnt/hdd/media/Video/Movies
+      addpaused: no
+    clean_transmission:
+      host: localhost
+      port: 9091
+      username: '{{ secrets.transmission.username }}'
+      password: '{{ secrets.transmission.password }}'
+      finished_for: 2 hours
+      min_ratio: 2
+    disable: [details]
+    email:
+      template: html
+      from: RasPi
+      subject: Shows Being Downloaded
+      to:
+        - '{{ secrets.gmail.to }}'
+        - '{{ secrets.gmail.to2 }}'
+      smtp_host: smtp.gmail.com
+      smtp_port: 587
+      smtp_login: True
+      smtp_username: '{{ secrets.gmail.user }}'
+      smtp_password: '{{ secrets.gmail.password }}'
+      smtp_tls: true
+
+
