@@ -30,15 +30,7 @@ tasks:
       path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
       addpaused: no
     email:
-<<<<<<< HEAD
-      # template: html
-<<<<<<< Updated upstream
-=======
->>>>>>> f424cf20d15a930f3ae1df19d6c9bc9c027413a0
-      from: RasPi
-=======
       from: RasPi@eecsfl.com
->>>>>>> Stashed changes
       title: Shows Ready to Watch
       to:
         - '{{ secrets.gmail.to }}'
@@ -124,15 +116,7 @@ tasks:
       min_ratio: 2
     disable: [details]
     email:
-<<<<<<< HEAD
-      # template: html
-<<<<<<< Updated upstream
-=======
->>>>>>> f424cf20d15a930f3ae1df19d6c9bc9c027413a0
-      from: RasPi
-=======
       from: RasPi@eecsfl.com
->>>>>>> Stashed changes
       title: Shows Being Downloaded
       to:
         - '{{ secrets.gmail.to }}'
