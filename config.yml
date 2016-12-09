@@ -15,7 +15,6 @@ tasks:
     thetvdb_lookup: yes
     pathscrub: windows
     set:
-      #magnets: no
       skip_files:
         - '*.nfo'
         - '*.sfv'
@@ -31,7 +30,6 @@ tasks:
       path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
       addpaused: no
     email:
-      # template: html
       from: RasPi
       title: Shows Ready to Watch
       to:
@@ -39,7 +37,6 @@ tasks:
         - '{{ secrets.gmail.to2 }}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
-      # smtp_login: True
       smtp_username: '{{ secrets.gmail.user }}'
       smtp_password: '{{ secrets.gmail.password }}'
       smtp_tls: true
@@ -86,15 +83,10 @@ tasks:
         - '[eE][nN][gG]'
     discover:
       what:
-        #- movie_list: all my watchlists
-        #- movie_list: watchlist
         - movie_list: watchlist_renee
         - movie_list: watchlist_andy
       from:
         - flexget_archive: yes
-        #- cpasbien: 
-            #category: 720p
-        #- piratebay: yes
         - rarbg:
             category: [14, 17, 42, 44, 45, 46, 48]
         - newtorrents:
@@ -124,7 +116,6 @@ tasks:
       min_ratio: 2
     disable: [details]
     email:
-      # template: html
       from: RasPi
       title: Shows Being Downloaded
       to:
@@ -132,9 +123,6 @@ tasks:
         - '{{ secrets.gmail.to2 }}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
-      # smtp_login: True
       smtp_username: '{{ secrets.gmail.user }}'
       smtp_password: '{{ secrets.gmail.password }}'
       smtp_tls: true
-
-
