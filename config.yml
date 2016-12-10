@@ -131,16 +131,15 @@ tasks:
       smtp_username: '{{ secrets.gmail.user }}'
       smtp_password: '{{ secrets.gmail.password }}'
       smtp_tls: true
-   pushover:
-    user_key: '{{secrets.pushover.userkey}}'
-    api_key: '{{secrets.pushover.apikey}}'
-    sound: bike
-    title: >
-      {%if task in ["task_a","task_b"](/"task_a","task_b")%} New movie added to queue
-      {%else%}Download Started from task {{task}}
-      {%endif%}
-    message: >
-      {% if series_name is defined %}{{series_name}} - {{series_id}} - {{trakt_ep_name}} - {{quality|d('')}}
-      {% elif imdb_name is defined%}{{movie_name}} - {{quality}}
-      {% else %}{{title}}
-      {% endif %}
+ pushover:
+  user_key: '{{secrets.pushover.userkey}}'
+  api_key: '{{secrets.pushover.apikey}}'
+  sound: bike
+  title: >
+    {%if task in ["task_a","task_b"](/"task_a","task_b")%} New movie added to queue
+    {%else%}Download Started from task {{task}}
+    {%endif%}
+  message: >
+    {% if series_name is defined %}{{series_name}} - {{series_id}} - {{trakt_ep_name}} - {{quality|d('')}}
+    {% elif imdb_name is defined%}{{movie_name}} - {{quality}}
+    {% else %}{{title}}     {% endif %}
