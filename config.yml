@@ -46,8 +46,6 @@ tasks:
             user_key: '{{ secrets.pushover.user_key }}'
       scope: task
       file_template: default      
-  url: '{{trakt_series_trakt_url|d(imdb_url)}}'
-  url_title: Link
   priority: >
     {% if task == "retreive_from_couchpotato" %}-1
     {% else %}0
