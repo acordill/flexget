@@ -131,7 +131,7 @@ tasks:
       smtp_username: '{{ secrets.gmail.user }}'
       smtp_password: '{{ secrets.gmail.password }}'
       smtp_tls: true
- pushover:
+pushover:
   user_key: '{{secrets.pushover.userkey}}'
   api_key: '{{secrets.pushover.apikey}}'
   sound: bike
