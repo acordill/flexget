@@ -30,7 +30,7 @@ tasks:
       path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
       addpaused: no
     email:
-      from: RasPi@eecsfl.com
+      from: RasPi
       title: Shows Ready to Watch
       to:
         - '{{ secrets.gmail.to }}'
@@ -39,17 +39,15 @@ tasks:
       smtp_port: 587
       smtp_username: '{{ secrets.gmail.user }}'
       smtp_password: '{{ secrets.gmail.password }}'
-      smtp_tls: yes
+      smtp_tls: true
+
     notify_entries:
       to:
         - pushover:
-            user_key: '{{ secrets.pushover.user_key }}'
+            user_key: user_key
       scope: task
-      file_template: default      
-  priority: >
-    {% if task == "retreive_from_couchpotato" %}-1
-    {% else %}0
-    {% endif %}  #task to pull movies from imdb.com watchlist and add to the movie queue
+      file_template: default
+  #task to pull movies from imdb.com watchlist and add to the movie queue
   IMDB Movie Add - Andy:
     priority: 20 # run before the movie search task
     pathscrub: windows
@@ -125,7 +123,7 @@ tasks:
       min_ratio: 2
     disable: [details]
     email:
-      from: RasPi@eecsfl.com
+      from: RasPi
       title: Shows Being Downloaded
       to:
         - '{{ secrets.gmail.to }}'
@@ -138,6 +136,6 @@ tasks:
     notify_entries:
       to:
         - pushover:
-            user_key: '{{ secrets.pushover.user_key }}'
+            user_key: user_key
       scope: task
       file_template: default
