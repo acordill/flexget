@@ -53,6 +53,7 @@ tasks:
         {% elif imdb_name is defined%}{{movie_name}} - {{quality}}
         {% else %}{{title}}
         {% endif %}
+        
   url: '{{trakt_series_trakt_url|d(imdb_url)}}'
   url_title: Link
   priority: >
