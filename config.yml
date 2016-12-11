@@ -60,8 +60,8 @@ tasks:
         {%- for group in task.accepted|groupby('task') %}
         FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
           {%- for entry in group.list %}
-        - {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
-          {% endfor %}
+        #- {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
+        - {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
         {% endfor %}
         {% endif -%}
         {% if task.failed -%}
@@ -178,8 +178,8 @@ tasks:
         {%- for group in task.accepted|groupby('task') %}
         FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
           {%- for entry in group.list %}
-        - {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
-          {% endfor %}
+        #- {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
+        - {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
         {% endfor %}
         {% endif -%}
         {% if task.failed -%}
