@@ -48,30 +48,29 @@ tasks:
             user_key: '{{ secrets.pushover.userkey }}'
       scope: task
       file_template: default
-    notify_task:
-      to:
-        - pushover:
-            user_key: '{{ secrets.pushover.userkey }}'
-      message: |+
-        {% if task.aborted -%}
-        Task {{task_name}} was aborted because: {{task.abort_reason}}
-        {% endif -%}
-        {% if task.accepted -%}
-        {%- for group in task.accepted|groupby('task') %}
-        FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
-          {%- for entry in group.list %}
-        #- {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
-        - {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
-        {% endfor %}
-        {% endif -%}
-        {% if task.failed -%}
-        {%- for group in task.failed|groupby('task') %}
-        The following entries have failed for task {{group.grouper}}:
-          {%- for entry in group.list %}
-            - {{entry.title}} ({{entry.url}}) Reason: {{entry.reason|d('unknown')}}
-          {% endfor %}
-        {% endfor %}
-        {% endif %}    
+    #notify_task:
+      #to:
+        #- pushover:
+            #user_key: '{{ secrets.pushover.userkey }}'
+      #message: |+
+        #{% if task.aborted -%}
+        #Task {{task_name}} was aborted because: {{task.abort_reason}}
+        #{% endif -%}
+        #{% if task.accepted -%}
+        #{%- for group in task.accepted|groupby('task') %}
+        #FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
+          #{%- for entry in group.list %}
+        #- {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
+        #{% endfor %}
+        #{% endif -%}
+        #{% if task.failed -%}
+        #{%- for group in task.failed|groupby('task') %}
+        #The following entries have failed for task {{group.grouper}}:
+          #{%- for entry in group.list %}
+            #- {{entry.title}} ({{entry.url}}) Reason: {{entry.reason|d('unknown')}}
+          #{% endfor %}
+        #{% endfor %}
+        #{% endif %}    
     #end of notify
   #task to pull movies from imdb.com watchlist and add to the movie queue
   IMDB Movie Add - Andy:
@@ -166,27 +165,26 @@ tasks:
             user_key: '{{ secrets.pushover.userkey }}'
       scope: task
       file_template: default
-    notify_task:
-      to:
-        - pushover:
-            user_key: '{{ secrets.pushover.userkey }}'
-      message: |+
-        {% if task.aborted -%}
-        Task {{task_name}} was aborted because: {{task.abort_reason}}
-        {% endif -%}
-        {% if task.accepted -%}
-        {%- for group in task.accepted|groupby('task') %}
-        FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
-          {%- for entry in group.list %}
-        #- {{entry.title}} ({{entry.url}}){% if entry.output|d(false) %} => {{entry.output}}{% endif %}
-        - {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
-        {% endfor %}
-        {% endif -%}
-        {% if task.failed -%}
-        {%- for group in task.failed|groupby('task') %}
-        The following entries have failed for task {{group.grouper}}:
-          {%- for entry in group.list %}
-            - {{entry.title}} ({{entry.url}}) Reason: {{entry.reason|d('unknown')}}
-          {% endfor %}
-        {% endfor %}
-        {% endif %}
+    #notify_task:
+      #to:
+        #- pushover:
+            #user_key: '{{ secrets.pushover.userkey }}'
+      #message: |+
+        #{% if task.aborted -%}
+        #Task {{task_name}} was aborted because: {{task.abort_reason}}
+        #{% endif -%}
+        #{% if task.accepted -%}
+        #{%- for group in task.accepted|groupby('task') %}
+        #FlexGet has just downloaded {{group.list|length}} new entries for task {{group.grouper}}:
+          #{%- for entry in group.list %}
+        #- {{entry.title}} {% if entry.output|d(false) %} => {{entry.output}}{% endif %}          {% endfor %}
+        #{% endfor %}
+        #{% endif -%}
+        #{% if task.failed -%}
+        #{%- for group in task.failed|groupby('task') %}
+        #The following entries have failed for task {{group.grouper}}:
+          #{%- for entry in group.list %}
+            #- {{entry.title}} ({{entry.url}}) Reason: {{entry.reason|d('unknown')}}
+          #{% endfor %}
+        #{% endfor %}
+        #{% endif %}
