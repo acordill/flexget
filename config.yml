@@ -123,6 +123,7 @@ tasks:
             category: [14, 17, 42, 44, 45, 46, 48]
         - newtorrents:
             interval: 1 days
+        - piratebay: yes
       release_estimations: strict
     torrent_alive: 1 # Will reject results with less than 1 seeds
     quality: dvdrip+ # Make sure no screeners or cams are downloaded
