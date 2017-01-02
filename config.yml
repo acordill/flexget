@@ -33,8 +33,8 @@ tasks:
       from: '{{ secrets.email.from }}'
       title: Shows Ready to Watch
       to:
-        - '{{ secrets.gmail.to }}'
-        - '{{ secrets.gmail.to2 }}'
+       # - '{{ secrets.gmail.andy }}'
+        - '{{ secrets.gmail.renee }}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
       smtp_username: '{{ secrets.gmail.user }}'
