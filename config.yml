@@ -90,7 +90,7 @@ tasks:
     accept_all: yes
 
   IMDB Movie Add - Renee:
-    priority: 20 # run before the movie search task
+    priority: 21 # run before the movie search task
     pathscrub: windows
     imdb_list:
       login: '{{ secrets.imdb.login_renee }}'
