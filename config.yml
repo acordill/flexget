@@ -29,12 +29,16 @@ tasks:
       content_filename: '{{ tvdb_series_name }} - {{ tvdb_season }}x{{ tvdb_episode|pad(2) }} - {{ tvdb_ep_name|default('''') }}'
       path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
       addpaused: no
-    email:
-      from: '{{ email.from }}'
-      title: Shows Ready to Watch
-      to:
-       # - '{{ secrets.gmail.andy }}'
-        - '{{ gmail.renee }}'
+    notify:
+      task:
+        template: html
+        via:
+        - email:
+            from: '{{ email.from }}'
+            title: Shows Ready to Watch
+            to:
+              #- '{{ gmail.andy }}'
+              - '{{ gmail.renee }}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
       smtp_username: '{{ gmail.user }}'
@@ -42,12 +46,13 @@ tasks:
       smtp_tls: true
 
     #start of notify 
-    notify_entries:
-      to:
-        - pushover:
-            user_key: '{{ pushover.userkey }}'
-      scope: task
-      file_template: default
+    notify:
+      entries:
+        to:
+          - pushover:
+              user_key: '{{ pushover.userkey }}'
+        scope: task
+        file_template: default
     #notify_task:
       #to:
         #- pushover:
@@ -148,24 +153,29 @@ tasks:
       finished_for: 2 hours
       min_ratio: 2
     disable: [details]
-    email:
-      from: '{{ email.from }}'
-      title: Shows Being Downloaded
-      to:
-       # - '{{ secrets.gmail.andy }}'
-        - '{{ gmail.renee}}'
+    notify:
+      task:
+        template: html
+        via:
+          - email:
+              from: '{{ email.from }}'
+              title: Shows Being Downloaded
+              to:
+              # - '{{ gmail.andy }}'
+                - '{{ gmail.renee}}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
       smtp_username: '{{ gmail.user }}'
       smtp_password: '{{ gmail.password }}'
       smtp_tls: true
     #start of notify
-    notify_entries:
-      to:
-        - pushover:
-            user_key: '{{ pushover.userkey }}'
-      scope: task
-      file_template: default
+    notify:
+      entries:
+        to:
+          - pushover:
+              user_key: '{{ pushover.userkey }}'
+        scope: task
+        file_template: default
     #notify_task:
       #to:
         #- pushover:
