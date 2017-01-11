@@ -44,7 +44,7 @@ tasks:
       smtp_tls: true
 
     #start of notify 
-    notify:
+    #notify:
       entries:
         via:
           - pushover:
@@ -167,7 +167,7 @@ tasks:
       smtp_password: '{? gmail.password ?}'
       smtp_tls: true
     #start of notify
-    notify:
+    #notify:
       entries:
         via:
           - pushover:
