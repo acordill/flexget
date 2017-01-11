@@ -10,7 +10,7 @@ schedules:
 tasks:
   TV Show Search:
     priority: 10
-    rss:  http://showrss.info/user/"{{ showrss.ano }}".rss?magnets=true&namespaces=true&name=null&quality=null&re=null
+    rss:  http://showrss.info/user/{{showrss.ano}}.rss?magnets=true&namespaces=true&name=null&quality=null&re=null
     all_series: yes
     thetvdb_lookup: yes
     pathscrub: windows
