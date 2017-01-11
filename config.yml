@@ -10,7 +10,7 @@ schedules:
 tasks:
   TV Show Search:
     priority: 10
-    rss:  http://showrss.info/user/{{ showrss.ano }}.rss?magnets=true&namespaces=true&name=null&quality=null&re=null
+    rss:  http://showrss.info/user/"{{ showrss.ano }}".rss?magnets=true&namespaces=true&name=null&quality=null&re=null
     all_series: yes
     thetvdb_lookup: yes
     pathscrub: windows
@@ -23,8 +23,8 @@ tasks:
     transmission:
       host: localhost
       port: 9091
-      username: '{{ transmission.username }}'
-      password: '{{ transmission.password }}'
+      username: "{{ transmission.username }}"
+      password: "{{ transmission.password }}"
       main_file_only: true
       content_filename: '{{ tvdb_series_name }} - {{ tvdb_season }}x{{ tvdb_episode|pad(2) }} - {{ tvdb_ep_name|default('''') }}'
       path: /mnt/hdd/media/Video/TV/{{series_name}}/Season {{series_season}}
@@ -80,8 +80,8 @@ tasks:
     priority: 20 # run before the movie search task
     pathscrub: windows
     imdb_list:
-      login: '{{ secrets.imdb.login_andy }}'
-      password: '{{ secrets.imdb.password_andy }}'
+      login: "{{ imdb.login_andy }}"
+      password: "{{ imdb.password_andy }}"
       list: watchlist
     imdb_lookup: yes
     tmdb_lookup: yes
@@ -96,8 +96,8 @@ tasks:
     priority: 21 # run before the movie search task
     pathscrub: windows
     imdb_list:
-      login: '{{ secrets.imdb.login_renee }}'
-      password: '{{ secrets.imdb.password_renee }}'
+      login: "{{ imdb.login_renee }}"
+      password: "{{ imdb.password_renee }}"
       list: watchlist
     imdb_lookup: yes
     tmdb_lookup: yes
@@ -137,8 +137,8 @@ tasks:
     transmission:
       host: localhost
       port: 9091
-      username: '{{ transmission.username }}'
-      password: '{{ transmission.password }}'
+      username: "{{ transmission.username }}"
+      password: "{{ transmission.password }}"
       main_file_only: true
       content_filename: '{{ imdb_name }} ({{ imdb_year }}) - {{ quality|upper }}'
       path: /mnt/hdd/media/Video/Movies
@@ -146,8 +146,8 @@ tasks:
     clean_transmission:
       host: localhost
       port: 9091
-      username: '{{ transmission.username }}'
-      password: '{{ transmission.password }}'
+      username: "{{ transmission.username }}"
+      password: "{{ transmission.password }}"
       finished_for: 2 hours
       min_ratio: 2
     disable: [details]
