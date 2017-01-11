@@ -80,8 +80,8 @@ tasks:
     priority: 20 # run before the movie search task
     pathscrub: windows
     imdb_list:
-      login: '{{ imdb.login_andy }}'
-      password: '{{ imdb.password_andy }}'
+      login: '{{ secrets.imdb.login_andy }}'
+      password: '{{ secrets.imdb.password_andy }}'
       list: watchlist
     imdb_lookup: yes
     tmdb_lookup: yes
@@ -96,8 +96,8 @@ tasks:
     priority: 21 # run before the movie search task
     pathscrub: windows
     imdb_list:
-      login: '{{ imdb.login_renee }}'
-      password: '{{ imdb.password_renee }}'
+      login: '{{ secrets.imdb.login_renee }}'
+      password: '{{ secrets.imdb.password_renee }}'
       list: watchlist
     imdb_lookup: yes
     tmdb_lookup: yes
