@@ -49,8 +49,8 @@ tasks:
         via:
           - pushover:
               user_key: '{{ pushover.userkey }}'
-        scope: task
-        file_template: default
+        #scope: task
+        #file_template: default
     #notify_task:
       #to:
         #- pushover:
@@ -172,8 +172,8 @@ tasks:
         via:
           - pushover:
               user_key: '{{ pushover.userkey }}'
-        scope: task
-        file_template: default
+        #scope: task
+        #file_template: default
     #notify_task:
       #to:
         #- pushover:
