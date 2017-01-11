@@ -46,7 +46,7 @@ tasks:
     #start of notify 
     notify:
       entries:
-        to:
+        via:
           - pushover:
               user_key: '{{ pushover.userkey }}'
         scope: task
@@ -169,7 +169,7 @@ tasks:
     #start of notify
     notify:
       entries:
-        to:
+        via:
           - pushover:
               user_key: '{{ pushover.userkey }}'
         scope: task
