@@ -35,10 +35,8 @@ tasks:
         via:
         - email:
             from: '{{ email.from }}'
-            title: Shows Ready to Watch
-            to:
-              #- '{{ gmail.andy }}'
-              - '{{ gmail.renee }}'
+            #title: Shows Ready to Watch
+            to: '{{ gmail.renee }}'
       smtp_host: smtp.gmail.com
       smtp_port: 587
       smtp_username: '{{ gmail.user }}'
